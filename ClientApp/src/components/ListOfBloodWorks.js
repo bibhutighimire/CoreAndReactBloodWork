@@ -11,7 +11,7 @@ export class ListOfBloodWorks extends Component {
 
     componentDidMount() {
         // 2) When the component mounts, we make the async call to the server to retrieve the API results.
-        this.populateBloodworksData();
+        this.populateBloodworkData();
     }
 
 
@@ -33,16 +33,17 @@ export class ListOfBloodWorks extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {bloodworks.map(bloodworks =>
-                        <tr id={bloodworks.BloodWorkID}>
-                            <td>{bloodworks.DateCreated}</td>
-                            <td>{bloodworks.ExamDate}</td>
-                            <td>{bloodworks.ResultsDate}</td>
-                            <td>{bloodworks.Description}</td>
-                            <td>{bloodworks.Hemoglobin}</td>
-                            <td>{bloodworks.Hematocrit}</td>
-                            <td>{bloodworks.WhiteBloodCellCount}</td>
-                            <td>{bloodworks.RedBloodCellCount}</td>
+                    {bloodworks.map(bloodwork =>
+                        <tr key={bloodwork.bloodWorkID}>
+                         
+                            <td>{bloodwork.dateCreated}</td>
+                            <td>{bloodwork.examDate}</td>
+                            <td>{bloodwork.resultsDate}</td>
+                            <td>{bloodwork.description}</td>
+                            <td>{bloodwork.hemoglobin}</td>
+                            <td>{bloodwork.hematocrit}</td>
+                            <td>{bloodwork.whiteBloodCellCount}</td>
+                            <td>{bloodwork.redBloodCellCount}</td>
 
 
                         </tr>
@@ -68,8 +69,8 @@ export class ListOfBloodWorks extends Component {
     }
 
 
-    async populateBloodworksData() {
-        axios.get(`api/bloodworks/All`)
+    async populateBloodworkData() {
+        axios.get(`bloodwork/api/All`)
             .then(res => {
                 const data = res.data;
                 this.setState({ bloodworks: data, loading: false });

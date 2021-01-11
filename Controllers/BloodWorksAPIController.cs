@@ -9,7 +9,7 @@ using CoreAndReact.Models;
 
 namespace CoreAndReact.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("BloodWork")]
     [ApiController]
     public class BloodWorksAPIController : ControllerBase
     {
@@ -21,12 +21,12 @@ namespace CoreAndReact.Controllers
         }
         //https://localhost:44307/api/BloodWorksAPI
         // GET: api/BloodWorksAPI
-        [HttpGet("bloodworks/All")]
-        public async Task<ActionResult<IEnumerable<BloodWork>>> GetBloodWork()
+        [HttpGet("API/All")]
+        public List<BloodWork> GetBloodWork()
         {
-            
-           
-            return await _context.BloodWork.ToListAsync();
+
+            var listofbloodworks = _context.BloodWork.ToList();
+            return listofbloodworks;
         }
 
         // GET: api/BloodWorksAPI/5
