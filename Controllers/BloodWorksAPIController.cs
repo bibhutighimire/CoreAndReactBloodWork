@@ -45,7 +45,21 @@ namespace CoreAndReact.Controllers
 
         // PUT: api/BloodWorksAPI/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+
+        [HttpPut("API/Update/ID")]
+        public async Task<ActionResult<BloodWork>> PutBloodWork(int id)
+        {
+            var targetToEdit = await _context.BloodWork.FindAsync(id);
+            if (targetToEdit==null)
+            {
+                return BadRequest();
+            }
+
+           
+            return targetToEdit;
+        }
+
+        [HttpPut("API/Update")]
         public async Task<IActionResult> PutBloodWork(int id, BloodWork bloodWork)
         {
             if (id != bloodWork.BloodWorkID)
@@ -76,7 +90,7 @@ namespace CoreAndReact.Controllers
 
         // POST: api/BloodWorksAPI
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("API/Create")]
         public async Task<ActionResult<BloodWork>> PostBloodWork(BloodWork bloodWork)
         {
             _context.BloodWork.Add(bloodWork);
@@ -86,7 +100,7 @@ namespace CoreAndReact.Controllers
         }
 
         // DELETE: api/BloodWorksAPI/5
-        [HttpDelete("{id}")]
+        [HttpDelete("API/Delete/{id}")]
         public async Task<IActionResult> DeleteBloodWork(int id)
         {
             var bloodWork = await _context.BloodWork.FindAsync(id);

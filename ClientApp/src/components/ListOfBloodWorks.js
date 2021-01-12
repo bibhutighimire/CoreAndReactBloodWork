@@ -15,7 +15,7 @@ export class ListOfBloodWorks extends Component {
     }
 
 
-    static renderBloodWorkTable(bloodworks) {
+    renderBloodWorkTable(bloodworks) {
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -44,6 +44,9 @@ export class ListOfBloodWorks extends Component {
                             <td>{bloodwork.hematocrit}</td>
                             <td>{bloodwork.whiteBloodCellCount}</td>
                             <td>{bloodwork.redBloodCellCount}</td>
+                            <td><button className="btn btn-success" onClick={() => this.handleEdit(bloodwork.bloodWorkID)}>Edit</button>&nbsp;</td>
+                            <td><button className="btn btn-success" onClick={() => this.handleDetails(bloodwork.bloodWorkID)}>Details</button>&nbsp;</td>
+                            <td><button className="btn btn-success" onClick={() => this.handleDelete(bloodwork.bloodWorkID)}>Delete</button>&nbsp;</td>
 
 
                         </tr>
@@ -54,10 +57,31 @@ export class ListOfBloodWorks extends Component {
 
     }
 
+    handleEdit(bloodWorkID) {
+        this.props.history.push("/editbloodwork/" + bloodWorkID);
+    }
+
+    handleDelete(bloodWorkID) {
+        if (!window.confirm("Do you want to delete this record?")) {
+            return;
+        }
+        else {
+            fetch('bloodwork/api/delete/' + bloodWorkID, { method: 'delete' })
+                .then(data => {
+                    this.setState({
+                        data: this.state.bloodworks.filter((rec) => {
+                            return rec.bloodWorkID != bloodWorkID;
+                        })
+                    });
+                });
+        }
+    }
+
+
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : ListOfBloodWorks.renderBloodWorkTable(this.state.bloodworks);
+            : this.renderBloodWorkTable(this.state.bloodworks);
 
         return (
             <div>
