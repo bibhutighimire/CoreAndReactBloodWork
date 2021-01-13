@@ -30,7 +30,7 @@ namespace CoreAndReact.Controllers
         }
 
         // GET: api/BloodWorksAPI/5
-        [HttpGet("{id}")]
+        [HttpGet("API/Details/{id}")]
         public async Task<ActionResult<BloodWork>> GetBloodWork(int id)
         {
             var bloodWork = await _context.BloodWork.FindAsync(id);

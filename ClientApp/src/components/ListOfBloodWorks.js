@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export class ListOfBloodWorks extends Component {
     static displayName = ListOfBloodWorks.name;
@@ -16,7 +17,8 @@ export class ListOfBloodWorks extends Component {
 
 
     renderBloodWorkTable(bloodworks) {
-        return (
+        return (<>
+            <Link to="/AddBloodWork">Add New Blood Work</Link>
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -53,12 +55,14 @@ export class ListOfBloodWorks extends Component {
                     )}
                 </tbody>
             </table>
-        );
-
+        </>);
     }
-
     handleEdit(bloodWorkID) {
         this.props.history.push("/editbloodwork/" + bloodWorkID);
+    }
+
+    handleDetails(bloodWorkID) {
+        this.props.history.push("/detailsbloodwork/" + bloodWorkID);
     }
 
     handleDelete(bloodWorkID) {

@@ -5,6 +5,8 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { ListOfBloodWorks } from './components/ListOfBloodWorks';
 import { EditBloodWork } from './components/EditBloodWork';
+import { AddBloodWork } from './components/AddBloodWork';
+import { DetailsBloodWork } from './components/DetailsBloodWork';
 
 import './custom.css'
 
@@ -18,6 +20,7 @@ export default class App extends Component {
             <Route path='/listofbloodworks' component={ListOfBloodWorks} />
             <Route path='/editbloodwork' component={EditBloodWork} />
             <Route path='/addbloodwork' component={AddBloodWork} />
+            <Route path='/detailsbloodwork' component={DetailsBloodWork} />
         <Route path='/fetch-data' component={FetchData} />
       </Layout>
     );
